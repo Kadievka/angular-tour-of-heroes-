@@ -11,7 +11,9 @@ import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 })
 export class HeroesComponent implements OnInit {
 
-  constructor(private heroService: HeroService, private messageService: MessageService) {}
+  heroes: Hero[] = [];
+
+  constructor(private heroService: HeroService) {}
 
   ngOnInit(): void {  // lifecycle hook
     this.getHeroes();
@@ -20,14 +22,6 @@ export class HeroesComponent implements OnInit {
   getHeroes(): void {
     this.heroService.getHeroes()
       .subscribe(heroes => this.heroes = heroes);
-  }
-
-  heroes: Hero[] = [];
-
-  selectedHero?: Hero;
-  onSelect(hero: Hero): void {
-    this.selectedHero = hero;
-    this.messageService.add(`HeroesComponent: Selected hero id=${hero.id}`);
   }
 
 }
